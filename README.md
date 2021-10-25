@@ -7,6 +7,7 @@ Traces all queries along with the query SQL.
 
 Usage Example:
 ====
+
 ```go
 // Copyright The OpenTelemetry Authors
 //
@@ -25,9 +26,9 @@ Usage Example:
 package main
 
 import (
+	"github.com/byteintellect/gorm-opentelemetry"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"github.com/byteintellect/gorm-opentelemetry"
 )
 
 type Product struct {
@@ -45,7 +46,7 @@ func ExampleNewPlugin() {
 
 	// Initialize otel plugin with options
 	plugin := otelgorm.NewPlugin(
-	// include any options here
+		// include any options here
 	)
 	err = db.Use(plugin)
 	if err != nil {
