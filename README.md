@@ -27,7 +27,7 @@ package main
 import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"github.com/kostyay/gorm-opentelemetry"
+	"github.com/byteintellect/gorm-opentelemetry"
 )
 
 type Product struct {
