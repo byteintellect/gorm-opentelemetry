@@ -191,7 +191,7 @@ func TestPlugin(t *testing.T) {
 
 			assert.NoError(tt, err)
 
-			sr := new(oteltest.StandardSpanRecorder)
+			sr := new(oteltest.SpanRecorder)
 			provider := oteltest.NewTracerProvider(oteltest.WithSpanRecorder(sr))
 
 			plugin := NewPlugin(WithTracerProvider(provider))
@@ -217,9 +217,9 @@ func TestPlugin(t *testing.T) {
 
 			assert.Equal(tt, spans[0].SpanContext().TraceID, spans[1].SpanContext().TraceID)
 			assert.Equal(tt, spanName, s.Name())
-			assert.Equal(tt, "test_models", s.Attributes()[dbTableKey].AsString())
+			assert.Equal(tt, "test_models", s.Attributes()["db.table"].AsString())
 			assert.Equal(tt, tc.sqlOp, s.Attributes()[dbOperationKey].AsString())
-			assert.Equal(tt, tc.affectedRows, s.Attributes()[dbCountKey].AsInt64())
+			assert.Equal(tt, tc.affectedRows, s.Attributes()["db.count"].AsInt64())
 			assert.Contains(tt, s.Attributes()[dbStatementKey].AsString(), tc.sqlOp)
 		})
 	}
